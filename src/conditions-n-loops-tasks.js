@@ -69,8 +69,88 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  let qX = queen.x;
+  let qY = queen.y;
+  const kX = king.x;
+  const kY = king.y;
+
+  if (qX === kX && qY === kY) {
+    return true;
+  }
+
+  while (qX >= 1) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qX -= 1;
+  }
+  qX = queen.x;
+
+  while (qX <= 8) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qX += 1;
+  }
+  qX = queen.x;
+
+  while (qY <= 8) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qY += 1;
+  }
+  qY = queen.y;
+
+  while (qY >= 1) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qY -= 1;
+  }
+  qY = queen.y;
+
+  while (qY <= 8 && qX >= 1) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qY += 1;
+    qX -= 1;
+  }
+  qY = queen.y;
+  qX = queen.x;
+
+  while (qY <= 8 && qX <= 8) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qY += 1;
+    qX += 1;
+  }
+  qY = queen.y;
+  qX = queen.x;
+
+  while (qY >= 1 && qX <= 8) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qY -= 1;
+    qX += 1;
+  }
+  qY = queen.y;
+  qX = queen.x;
+
+  while (qY >= 1 && qX >= 1) {
+    if (qX === kX && qY === kY) {
+      return true;
+    }
+    qY -= 1;
+    qX -= 1;
+  }
+  qY = queen.y;
+  qX = queen.x;
+  return false;
 }
 
 /**
