@@ -435,8 +435,40 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+// function sortByAsc(arr) {
+//   if (arr.length === 0) return [];
+//   const a = [];
+//   const b = [];
+//   const p = arr[0];
+
+//   for (let i = 1; i < arr.length; i += 1) {
+//     if (arr[i] < p) a.push(arr[i]);
+//     else b.push(arr[i]);
+//   }
+//   return sortByAsc(a).concat(p, sortByAsc(b));
+// }
+function sortByAsc(arr, left = 0, right = arr.length - 1) {
+  const mas = arr;
+  function pivot(mas2, start = 0, end = arr.length - 1) {
+    const pivotVal = arr[start];
+    let swapIdx = start;
+    const pmas = mas2;
+    for (let i = start + 1; i <= end; i += 1) {
+      if (pivotVal > arr[i]) {
+        swapIdx += 1;
+        [pmas[swapIdx], pmas[i]] = [arr[i], arr[swapIdx]];
+      }
+    }
+
+    [pmas[start], pmas[swapIdx]] = [arr[swapIdx], arr[start]];
+    return swapIdx;
+  }
+  if (left < right) {
+    const pivotIndex = pivot(arr, left, right);
+    sortByAsc(arr, left, pivotIndex - 1);
+    sortByAsc(arr, pivotIndex + 1, right);
+  }
+  return mas;
 }
 
 /**
