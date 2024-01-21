@@ -198,10 +198,32 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
-}
+function convertToRomanNumerals(num) {
+  let number = num;
+  const arr = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+  const numArr = [];
+  let i = 0;
+  let roman = '';
+  while (number >= 1) {
+    numArr[i] = number % 10;
+    number = Math.floor(number / 10);
+    i += 1;
+  }
 
+  if (num >= 10) {
+    for (let j = 1; j <= numArr[1]; j += 1) {
+      roman += arr[9];
+    }
+  }
+  if (num >= 10 && num % 10 !== 0) {
+    roman += arr[numArr[0] - 1];
+  }
+  if (num < 10) {
+    roman = arr[num - 1];
+  }
+  return roman;
+}
+// console.log(convertToRomanNumerals(500));
 /**
  * Converts a number to a string, replacing digits with words.
  * In this task, the use of methods of the String and Array classes is not allowed.
@@ -511,8 +533,31 @@ function shuffleChar(/* str, iterations */) {
  */
 function getNearestBigger(/* number */) {
   throw new Error('Not implemented');
-}
+  // let num = number;
+  // const arr = [];
 
+  // while (num >= 1) {
+  //   arr.push(num % 10);
+  //   num = Math.floor(num / 10);
+  // }
+
+  // arr.reverse();
+
+  // let hasHearestBigger = false;
+
+  // for (let i = 0; i < arr.length - 1; i += 1) {
+  //   if (arr[i + 1] > arr[i]) {
+  //     hasHearestBigger = true;
+  //   }
+  // }
+
+  // if (!hasHearestBigger) {
+  //   return number;
+  // }
+
+  // return arr;
+}
+// console.log(getNearestBigger(54321));
 module.exports = {
   isPositive,
   getMaxNumber,
