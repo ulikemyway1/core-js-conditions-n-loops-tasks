@@ -593,10 +593,28 @@ function sortByAsc(arr, left = 0, right = arr.length - 1) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  const s = str.split('');
+  let i = iterations;
+  const j = Math.floor(str.length / 2);
+  while (i > 0) {
+    for (let k = 1; k <= j - 1; k += 1) {
+      for (let m = k; m < str.length - 1 - k; m += 2) {
+        const temp = s[m + 1];
+        s[m + 1] = s[m];
+        s[m] = temp;
+      }
+    }
+    i -= 1;
+  }
+  let result = '';
+  for (let k = 0; k < s.length; k += 1) {
+    result += s[k];
+  }
+  return result;
 }
 
+// console.log(shuffleChar('qwertyuiop', 20))
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
