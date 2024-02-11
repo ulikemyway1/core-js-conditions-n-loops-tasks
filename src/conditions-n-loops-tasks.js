@@ -638,33 +638,48 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
-  // let num = number;
-  // const arr = [];
+function getNearestBigger(number) {
+  let num = number;
+  const dig = [];
 
-  // while (num >= 1) {
-  //   arr.push(num % 10);
-  //   num = Math.floor(num / 10);
-  // }
-
-  // arr.reverse();
-
-  // let hasHearestBigger = false;
-
-  // for (let i = 0; i < arr.length - 1; i += 1) {
-  //   if (arr[i + 1] > arr[i]) {
-  //     hasHearestBigger = true;
-  //   }
-  // }
-
-  // if (!hasHearestBigger) {
-  //   return number;
-  // }
-
-  // return arr;
+  while (num >= 1) {
+    dig.push(num % 10);
+    num = Math.floor(num / 10);
+  }
+  dig.reverse();
+  const len = dig.length;
+  for (let i = len - 1; i >= 1; i -= 1) {
+    if (dig[i - 1] < dig[i]) {
+      const right = [];
+      for (let j = i; j < len; j += 1) {
+        if (dig[j] > dig[i - 1]) {
+          right.push(dig[j]);
+        }
+      }
+      const smallestRight = Math.min(...right);
+      for (let j = i; j < len; j += 1) {
+        if (dig[j] === smallestRight) {
+          const temp = dig[i - 1];
+          dig[i - 1] = dig[j];
+          dig[j] = temp;
+        }
+      }
+      const arr = [];
+      for (let j = i; j < len; j += 1) {
+        arr.push(dig[j]);
+      }
+      const sortArr = arr.sort((a, b) => a - b);
+      let k = 0;
+      for (let j = i; j < len; j += 1) {
+        dig[j] = sortArr[k];
+        k += 1;
+      }
+      return +dig.join('');
+    }
+  }
+  return number;
 }
-// console.log(getNearestBigger(54321));
+
 module.exports = {
   isPositive,
   getMaxNumber,
